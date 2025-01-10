@@ -18,10 +18,6 @@ public class PayService {
     PrintService paperPrintService = new PayslipPrintService();
 
     public void handlePayRequest(String role, double workedHours, double contractedHours) {
-        if (workedHours > 60.0) {
-            System.out.println("Worked hours " + workedHours + " exceeds 60 hours.");
-        }
-
         Payscale payscale = getPayscale(role);
         if (payscale == null) {
             System.out.printf("The role %s is not recognised\n", role);
@@ -59,7 +55,7 @@ public class PayService {
     }
 
     private String calculateOvertimePay(Payscale payscale, double workedHours, double contractedHours) {
-        if (workedHours >= 60) {
+        if (workedHours > 60) {
             System.out.println("Worked hours exceeds 60. Setting Cap.");
             workedHours = 60;
         }
